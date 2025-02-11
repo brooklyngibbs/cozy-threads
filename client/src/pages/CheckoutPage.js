@@ -53,21 +53,21 @@ const CheckoutForm = ({ cart, clientSecret }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <PaymentElement />
-      
+
       {error && (
         <div className="p-4 bg-red-50 text-red-600 rounded-lg text-sm">
           {error}
         </div>
       )}
-      
+
       <button
         type="submit"
         disabled={!stripe || isProcessing}
         className={`w-full flex items-center justify-center gap-2 py-3 px-4 
                    rounded-full font-medium transition-colors
-                   ${isProcessing 
-                     ? 'bg-amber-100 text-amber-400 cursor-not-allowed' 
-                     : 'bg-amber-900 text-white hover:bg-amber-800'}`}
+                   ${isProcessing
+            ? 'bg-amber-100 text-amber-400 cursor-not-allowed'
+            : 'bg-amber-900 text-white hover:bg-amber-800'}`}
       >
         {isProcessing ? (
           <>
@@ -75,7 +75,7 @@ const CheckoutForm = ({ cart, clientSecret }) => {
             Processing...
           </>
         ) : (
-          `Pay $${(cart.reduce((sum, item) => sum + item.price, 0) / 100).toFixed(2)}`
+          `Pay $${(cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0) / 100).toFixed(2)}`
         )}
       </button>
     </form>
@@ -93,7 +93,7 @@ const CheckoutPage = ({ cart }) => {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/create-payment-intent`, {
           items: cart.map(item => ({
             id: item.id,
-            quantity: 1
+            quantity: item.quantity || 1  // Add this
           }))
         });
         setClientSecret(response.data.clientSecret);
@@ -115,7 +115,7 @@ const CheckoutPage = ({ cart }) => {
           <p className="text-amber-600 mb-8">
             Add some items to your cart to proceed with checkout
           </p>
-          <a 
+          <a
             href="/"
             className="inline-flex items-center gap-2 bg-amber-100 hover:bg-amber-200 
                      text-amber-900 px-6 py-3 rounded-full font-medium transition-colors"
@@ -141,15 +141,15 @@ const CheckoutPage = ({ cart }) => {
               <h2 className="text-lg font-medium text-amber-900 mb-4">
                 Order Summary
               </h2>
-              
+
               <div className="space-y-4">
                 {cart.map((item, index) => (
                   <div key={index} className="flex gap-4">
                     <div className="w-16 h-16 bg-amber-50 rounded-lg overflow-hidden">
-                      <img 
-                        src={item.image} 
+                      <img
+                        src={item.image}
                         alt={item.name}
-                        className="w-full h-full object-cover" 
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="flex-1">
@@ -159,9 +159,14 @@ const CheckoutPage = ({ cart }) => {
                       {item.size && (
                         <p className="text-xs text-amber-600">Size: {item.size}</p>
                       )}
-                      <p className="text-sm text-amber-900">
-                        ${(item.price / 100).toFixed(2)}
-                      </p>
+                      <div className="flex justify-between items-center mt-1">
+                        <p className="text-sm text-amber-900">
+                          ${(item.price / 100).toFixed(2)} × {item.quantity || 1}
+                        </p>
+                        <p className="text-sm font-medium text-amber-900">
+                          ${((item.price * (item.quantity || 1)) / 100).toFixed(2)}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -171,7 +176,7 @@ const CheckoutPage = ({ cart }) => {
                 <div className="flex justify-between text-sm font-medium text-amber-900">
                   <span>Total</span>
                   <span>
-                    ${(cart.reduce((sum, item) => sum + item.price, 0) / 100).toFixed(2)}
+                    ${(cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0) / 100).toFixed(2)}
                   </span>
                 </div>
               </div>
