@@ -15,76 +15,85 @@ app.use(bodyParser.json());
 const products = [
   {
     id: '1',
-    name: 'Cozy Sweater',
-    description: 'Soft wool sweater for cold days',
-    price: 4999,
+    name: 'The Luxe Wool Sweater',
+    description: 'A premium, ultra-soft wool sweater designed for effortless warmth and elevated style.',
+    price: 6999,
     image: 'images/sweater.jpg',
     hasSizes: true, 
     category: 'womens'
   },
   {
     id: '2',
-    name: 'Comfy Socks',
-    description: 'Warm and breathable cotton socks',
-    price: 1999,
-    image: 'images/socks.jpg',
-    hasSizes: true,
-    category: 'accessories'
+    name: 'The Essential Knit Lounge Set',
+    description: 'A chic two-piece knit set that transitions seamlessly from cozy to stylish.',
+    price: 8999,
+    image: 'images/knitset.jpg',
+    hasSizes: true, 
+    category: 'womens'
   }, 
   {
     id: '3',
-    name: 'Chunky Knit Scarf',
-    description: 'Thick, oversized knit scarf to keep you warm',
-    price: 3499,
-    image: 'images/scarf.jpg',
+    name: 'Signature Gold Hoops',
+    description: 'Timeless and versatile, these lightweight gold hoops add effortless elegance to any look.',
+    price: 2499,
+    image: 'images/hoops.jpg',
     hasSizes: false, 
-    category: 'accessories'
-  }, 
+    category: 'jewelry'
+  },
   {
     id: '4',
-    name: 'Classic Beanie',
-    description: 'Snug fit to keep your head warm',
-    price: 1999,
-    image: 'images/beanie.jpg',
-    hasSizes: false, 
-    category: 'accessories'
-  }, 
-  {
-    id: '5',
-    name: 'Pearl Earrings',
-    description: 'Classic earrings for a night out',
-    price: 2499,
-    image: 'images/earrings.jpg',
+    name: 'The Dainty Back Chain',
+    description: 'A delicate gold back chain designed to add a subtle, sultry detail to your evening wear.',
+    price: 2999,
+    image: 'images/backchain.jpg',
     hasSizes: false, 
     category: 'jewelry'
   }, 
   {
-    id: '6',
-    name: 'Fuzzy Slippers',
-    description: 'Goes well with some Comfy Socks',
-    price: 3999,
-    image: 'images/slippers.jpg',
+    id: '5',
+    name: 'The Iconic White Boots',
+    description: 'Sleek, knee-high statement boots designed to elevate any outfit with modern sophistication.',
+    price: 7999,
+    image: 'images/boots.jpg',
     hasSizes: true, 
-    category: 'accessories'
-  }, 
+    category: 'shoes'
+  },
+  {
+    id: '6',
+    name: 'The Timeless Peacoat',
+    description: 'A structured, tailored peacoat in classic khaki—your go-to for effortless layering.',
+    price: 8999,
+    image: 'images/coat.jpg',
+    hasSizes: true, 
+    category: 'womens'
+  },
   {
     id: '7',
-    name: 'Heritage Knit Sweater',
-    description: 'Perfect for layering on chilly days',
-    price: 4999,
-    image: 'images/mensweater.jpg',
-    hasSizes: true, 
-    category: 'mens'
-  }, 
+    name: 'The Everyday Gold Necklace',
+    description: 'A minimalist gold chain that’s perfect for layering for an understated luxe look.',
+    price: 3499,
+    image: 'images/goldnecklace.jpg',
+    hasSizes: false, 
+    category: 'jewelry'
+  },
   {
     id: '8',
-    name: 'Cozy Kids’ Cardigan',
-    description: 'Made with breathable, durable fabric for all-day comfort',
-    price: 3999,
-    image: 'images/kidsweater.jpg',
-    hasSizes: true, 
-    category: 'kids'
-  }
+    name: 'Stacked Gold Ring Set',
+    description: 'A curated set of modern gold rings designed for stacking or styling solo.',
+    price: 3299,
+    image: 'images/goldrings.jpg',
+    hasSizes: false, 
+    category: 'jewelry'
+  },
+  {
+    id: '9',
+    name: 'Stacked Silver Ring Set',
+    description: 'A sleek and modern set of silver rings designed for effortless stacking.',
+    price: 3299,
+    image: 'images/silverrings.jpg',
+    hasSizes: false, 
+    category: 'jewelry'
+  },
 ];
 
 // API Endpoints
