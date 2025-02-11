@@ -46,14 +46,14 @@ const Home = ({ addToCart }) => {
             <div className="space-y-4">
               <div className="aspect-[3/4] rounded-2xl overflow-hidden">
                 <img
-                  src="images/home1.jpg"
+                  src="images/home5.jpg"
                   alt="Cozy fashion"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="aspect-square rounded-2xl overflow-hidden">
                 <img
-                  src="images/home2.jpg"
+                  src="images/home6.jpg"
                   alt="Sustainable fashion"
                   className="w-full h-full object-cover"
                 />
@@ -62,14 +62,14 @@ const Home = ({ addToCart }) => {
             <div className="space-y-4 pt-8">
               <div className="aspect-square rounded-2xl overflow-hidden">
                 <img
-                  src="images/home3.jpg"
+                  src="images/home7.jpg"
                   alt="Ethical fashion"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="aspect-[3/4] rounded-2xl overflow-hidden">
                 <img
-                  src="images/home4.jpg"
+                  src="images/home8.jpg"
                   alt="Conscious fashion"
                   className="w-full h-full object-cover"
                 />
