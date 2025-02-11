@@ -24,20 +24,19 @@ const Home = ({ addToCart }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-24">
           {/* Text Content */}
-          <div className="text-left">
+          <div className="text-left animate-fade-in">
             <h1 className="text-5xl md:text-6xl font-serif text-amber-900 mb-6">
-              welcome to cozy threads
+              Effortless Style, Timeless Comfort
             </h1>
             <p className="text-xl text-amber-700 mb-8">
               ethically-sourced, sustainably-made pieces for your everyday comfort
             </p>
-            <button 
+            <button
               onClick={scrollToProducts}
-              className="inline-flex items-center gap-2 bg-amber-100 hover:bg-amber-200 
-                     text-amber-900 px-8 py-4 rounded-full font-medium 
-                     transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 bg-amber-900 text-white hover:bg-amber-800 
+         px-8 py-4 rounded-full font-medium transition-all hover:scale-105"
             >
-              explore our collection
+              Shop the Collection
               <ShoppingBag className="w-5 h-5" />
             </button>
           </div>
@@ -46,32 +45,32 @@ const Home = ({ addToCart }) => {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-4">
               <div className="aspect-[3/4] rounded-2xl overflow-hidden">
-                <img 
-                  src="images/home1.jpg" 
-                  alt="Cozy fashion" 
+                <img
+                  src="images/home1.jpg"
+                  alt="Cozy fashion"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="aspect-square rounded-2xl overflow-hidden">
-                <img 
-                  src="images/home2.jpg" 
-                  alt="Sustainable fashion" 
+                <img
+                  src="images/home2.jpg"
+                  alt="Sustainable fashion"
                   className="w-full h-full object-cover"
                 />
               </div>
             </div>
             <div className="space-y-4 pt-8">
               <div className="aspect-square rounded-2xl overflow-hidden">
-                <img 
-                  src="images/home3.jpg" 
-                  alt="Ethical fashion" 
+                <img
+                  src="images/home3.jpg"
+                  alt="Ethical fashion"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="aspect-[3/4] rounded-2xl overflow-hidden">
-                <img 
-                  src="images/home4.jpg" 
-                  alt="Conscious fashion" 
+                <img
+                  src="images/home4.jpg"
+                  alt="Conscious fashion"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -82,27 +81,27 @@ const Home = ({ addToCart }) => {
         {/* Values Section with Background Image */}
         <div className="relative mb-24">
           <div className="absolute inset-0 overflow-hidden rounded-3xl">
-            <img 
-              src="images/background.jpg" 
-              alt="Background" 
+            <img
+              src="images/background.jpg"
+              alt="Background"
               className="w-full h-full object-cover opacity-20"
             />
           </div>
           <div className="relative grid md:grid-cols-3 gap-6 max-w-5xl mx-auto p-8">
-            <ValueProp 
+            <ValueProp
               icon={Leaf}
               title="Sustainable Materials"
-              description="Crafted from eco-friendly, responsibly sourced materials for a better tomorrow"
+              description="Better fabrics, better future. Thoughtfully crafted from eco-friendly materials."
             />
-            <ValueProp 
+            <ValueProp
               icon={Heart}
               title="Ethically Made"
-              description="Supporting fair wages and safe working conditions for all our artisans"
+              description="Fair wages, safe workplaces. Your style, made responsibly."
             />
-            <ValueProp 
+            <ValueProp
               icon={Sparkles}
               title="Timeless Style"
-              description="Curated designs that transcend trends for lasting comfort and beauty"
+              description="Classic pieces that outlast trends—effortless, refined, and forever stylish."
             />
           </div>
         </div>
