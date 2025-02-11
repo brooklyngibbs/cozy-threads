@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Plus, Loader } from 'lucide-react';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL; // Use environment variable
+
 const ProductCard = ({ product, addToCart }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
@@ -101,7 +103,7 @@ const ProductsPage = ({ addToCart }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5001/products");
+        const res = await axios.get(`${API_BASE_URL}/products`);
         setProducts(res.data);
         setIsLoading(false);
       } catch (err) {

@@ -1,9 +1,29 @@
 import React from 'react';
-import { X, ArrowRight, Trash2 } from 'lucide-react';
+import { X, ArrowRight, Trash2, Plus, Minus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const SlideCart = ({ isOpen, onClose, cart, removeFromCart }) => {
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
+const QuantityButton = ({ quantity, onChange }) => (
+  <div className="flex items-center gap-2">
+    <button
+      onClick={() => onChange(quantity - 1)}
+      className="p-1 hover:bg-amber-100 rounded-full transition-colors"
+    >
+      <Minus className="w-4 h-4 text-amber-900" />
+    </button>
+    <span className="w-8 text-center text-sm font-medium text-amber-900">
+      {quantity}
+    </span>
+    <button
+      onClick={() => onChange(quantity + 1)}
+      className="p-1 hover:bg-amber-100 rounded-full transition-colors"
+    >
+      <Plus className="w-4 h-4 text-amber-900" />
+    </button>
+  </div>
+);
+
+const SlideCart = ({ isOpen, onClose, cart, removeFromCart, updateQuantity }) => {
+  const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
 
   return (
     <>
@@ -47,9 +67,9 @@ const SlideCart = ({ isOpen, onClose, cart, removeFromCart }) => {
               </div>
             ) : (
               <div className="space-y-4 px-4">
-                {cart.map((item, index) => (
+                {cart.map((item) => (
                   <div 
-                    key={index}
+                    key={`${item.id}-${item.size || 'default'}`}
                     className="flex items-center gap-4 bg-amber-50 p-3 rounded-lg"
                   >
                     <div className="w-20 h-20 flex-shrink-0 bg-white rounded-md overflow-hidden">
@@ -64,20 +84,28 @@ const SlideCart = ({ isOpen, onClose, cart, removeFromCart }) => {
                       <h3 className="text-sm font-medium text-amber-900 truncate">
                         {item.name}
                       </h3>
-                      <p className="text-sm text-amber-600">
-                        Size: {item.size || 'M'}
-                      </p>
+                      {item.size && (
+                        <p className="text-sm text-amber-600">
+                          Size: {item.size}
+                        </p>
+                      )}
                       <p className="text-sm font-medium text-amber-900">
-                        ${(item.price / 100).toFixed(2)}
+                        ${((item.price * (item.quantity || 1)) / 100).toFixed(2)}
                       </p>
+                      <div className="flex items-center justify-between mt-2">
+                        <QuantityButton 
+                          quantity={item.quantity || 1}
+                          onChange={(newQuantity) => updateQuantity(item.id, item.size, newQuantity)}
+                        />
+                        <button
+                          onClick={() => removeFromCart(item.id, item.size)}
+                          className="p-1.5 text-amber-600 hover:text-amber-900 
+                                   hover:bg-amber-100 rounded-full transition-colors"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
-
-                    <button
-                      onClick={() => removeFromCart(index)}
-                      className="p-2 text-amber-600 hover:text-amber-900 transition-colors"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
                   </div>
                 ))}
               </div>

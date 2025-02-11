@@ -11,24 +11,29 @@ const CategoryFilter = ({ activeCategory, onCategoryChange }) => {
   const categories = ['all', 'mens', 'womens', 'kids', 'jewelry', 'accessories'];
   
   return (
-    <div className="flex justify-center mb-8">
-      <div className="flex gap-2 p-1 bg-amber-100/50 rounded-full">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => onCategoryChange(category)}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-colors
-                      ${activeCategory === category 
-                        ? 'bg-amber-900 text-white' 
-                        : 'text-amber-900 hover:bg-amber-200'}`}
-          >
-            {category.charAt(0).toUpperCase() + category.slice(1)}
-          </button>
-        ))}
+    <div className="mb-8 overflow-x-auto pb-4">
+      <div className="flex justify-start md:justify-center min-w-min px-4">
+        <div className="inline-flex gap-2 p-1 bg-amber-100/50 rounded-full">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => onCategoryChange(category)}
+              className={`whitespace-nowrap px-6 py-2 rounded-full text-sm font-medium 
+                        transition-colors ${
+                          activeCategory === category 
+                            ? 'bg-amber-900 text-white' 
+                            : 'text-amber-900 hover:bg-amber-200'
+                        }`}
+            >
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
+
 
 const ProductCard = ({ product, addToCart }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -143,7 +148,9 @@ const ProductList = ({ addToCart }) => {
   const [activeCategory, setActiveCategory] = useState('all');
 
   useEffect(() => {
-    axios.get("http://localhost:5001/products")
+    const API_BASE_URL = process.env.REACT_APP_API_URL;
+  
+    axios.get(`${API_BASE_URL}/products`)
       .then((res) => {
         setProducts(res.data);
         setIsLoading(false);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import {
@@ -10,8 +10,9 @@ import {
 import axios from 'axios';
 import { Loader } from 'lucide-react';
 
-// Initialize Stripe
-const stripePromise = loadStripe('pk_test_51P6GKbAKijA7wG0qaCZgP5zmq9rICeVShsQOAvDPvfO4EFTglKoIaciuITG9W1nyJtELAg6ET7AScebXsTmz1LzI00qemYrUdD'); // Replace with your Stripe publishable key
+// Load environment variables
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 const CheckoutForm = ({ cart, clientSecret }) => {
   const stripe = useStripe();
@@ -45,7 +46,7 @@ const CheckoutForm = ({ cart, clientSecret }) => {
     if (paymentError) {
       setError(paymentError.message);
     }
-    
+
     setIsProcessing(false);
   };
 
@@ -84,13 +85,12 @@ const CheckoutForm = ({ cart, clientSecret }) => {
 const CheckoutPage = ({ cart }) => {
   const [clientSecret, setClientSecret] = useState(null);
 
-  // Get payment intent when component mounts
-  React.useEffect(() => {
+  useEffect(() => {
     if (cart.length === 0) return;
 
     const getPaymentIntent = async () => {
       try {
-        const response = await axios.post('http://localhost:5001/create-payment-intent', {
+        const response = await axios.post(`${API_BASE_URL}/create-payment-intent`, {
           items: cart.map(item => ({
             id: item.id,
             quantity: 1
@@ -186,24 +186,7 @@ const CheckoutPage = ({ cart }) => {
               </h2>
 
               {clientSecret ? (
-                <Elements 
-                  stripe={stripePromise} 
-                  options={{
-                    clientSecret,
-                    appearance: {
-                      theme: 'stripe',
-                      variables: {
-                        colorPrimary: '#78350f',
-                        colorBackground: '#ffffff',
-                        colorText: '#78350f',
-                        colorDanger: '#ef4444',
-                        fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont',
-                        spacingUnit: '4px',
-                        borderRadius: '8px',
-                      },
-                    },
-                  }}
-                >
+                <Elements stripe={stripePromise} options={{ clientSecret }}>
                   <CheckoutForm cart={cart} clientSecret={clientSecret} />
                 </Elements>
               ) : (
