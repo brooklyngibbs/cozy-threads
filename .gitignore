@@ -1,0 +1,9 @@
+# Ignore all environment files
+.env
+.env.local
+.env.production
+.env.development
+client/.env
+client/.env.local
+client/.env.production
+client/.env.development
