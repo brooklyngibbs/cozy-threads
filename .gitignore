@@ -10,6 +10,8 @@ client/.env.development# See https://help.github.com/articles/ignoring-files/ fo
 
 # dependencies
 /node_modules
+client/node_modules
+node_modules
 /.pnp
 .pnp.js
 
@@ -18,6 +20,8 @@ client/.env.development# See https://help.github.com/articles/ignoring-files/ fo
 
 # production
 /build
+build
+client/build
 
 # misc
 .env
