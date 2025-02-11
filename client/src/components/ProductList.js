@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Plus, Loader, Eye } from 'lucide-react';
-
-// Helper function for size options
-const getSizeOptions = (productName) => {
-    return ['XS', 'S', 'M', 'L', 'XL'];
-};
+import { Plus, Loader } from 'lucide-react';
 
 const CategoryFilter = ({ activeCategory, onCategoryChange }) => {
   const categories = ['all', 'womens', 'shoes', 'jewelry', 'accessories'];
@@ -61,7 +56,8 @@ const ProductCard = ({ product, addToCart }) => {
       <div className="aspect-[3/4] overflow-hidden bg-cream-50 relative">
         <img 
           src={product.image} 
-          alt={product.name} 
+          alt={product.name}
+          loading="lazy"  
           className={`w-full h-full object-cover object-center transition-transform duration-700 
                     ${isHovered ? 'scale-105' : 'scale-100'}`}
         />
@@ -141,8 +137,6 @@ const ProductList = ({ addToCart }) => {
   const [activeCategory, setActiveCategory] = useState('all');
 
   useEffect(() => {
-    const API_BASE_URL = process.env.REACT_APP_API_URL;
-  
     axios.get(`${process.env.REACT_APP_API_URL}/products`)
       .then((res) => {
         setProducts(res.data);
