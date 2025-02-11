@@ -11,7 +11,7 @@ import axios from 'axios';
 import { Loader } from 'lucide-react';
 
 // Load environment variables
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 const CheckoutForm = ({ cart, clientSecret }) => {
@@ -90,7 +90,7 @@ const CheckoutPage = ({ cart }) => {
 
     const getPaymentIntent = async () => {
       try {
-        const response = await axios.post(`${API_BASE_URL}/create-payment-intent`, {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/create-payment-intent`, {
           items: cart.map(item => ({
             id: item.id,
             quantity: 1

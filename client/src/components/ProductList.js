@@ -150,7 +150,7 @@ const ProductList = ({ addToCart }) => {
   useEffect(() => {
     const API_BASE_URL = process.env.REACT_APP_API_URL;
   
-    axios.get(`${API_BASE_URL}/products`)
+    axios.get(`${process.env.REACT_APP_API_URL}/products`)
       .then((res) => {
         setProducts(res.data);
         setIsLoading(false);
